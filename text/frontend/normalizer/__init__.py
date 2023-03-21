@@ -13,3 +13,6 @@
 # limitations under the License.
 from text.frontend.normalizer.normalizer import *
 from text.frontend.normalizer.numbers import *
+
+#text.frontend.normalizer.normalizer 和 text.frontend.normalizer.numbers 两个模块。#
+#这些模块包含有关语音识别任务中的文本预处理的一些功能。
