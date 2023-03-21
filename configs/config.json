@@ -1,40 +1,43 @@
 {
+/*模型的训练配置文件,以下参数：
+
+*/
   "train": {
-    "log_interval": 100,
-    "eval_interval": 1000,
-    "seed": 1234,
-    "epochs": 10000,
-    "learning_rate": 0.0001,
-    "betas": [
+    "log_interval": 100, //log_interval：训练过程中每隔多少个batch打印一次日志信息。
+    "eval_interval": 1000, //eval_interval：训练过程中每隔多少个epoch进行一次验证。
+    "seed": 1234, //seed：随机数种子，用于控制随机操作的随机性，保证可重复性。
+    "epochs": 10000, //epochs：训练的总epoch数。
+    "learning_rate": 0.0001,//学习率
+    "betas": [  //betas：Adam优化器的超参数，用于控制动量和梯度平均系数。
       0.8,
       0.99
     ],
     "eps": 1e-09,
-    "batch_size": 12,
-    "fp16_run": true,
-    "lr_decay": 0.999875,
-    "segment_size": 16384,
-    "init_lr_ratio": 1,
-    "warmup_epochs": 0,
-    "c_mel": 45,
-    "c_kl": 1.0,
-    "save_dir": "./logdir/vispeech"
+    "batch_size": 12, //batch_size：每个batch的大小。
+    "fp16_run": true, //fp16_run：是否使用半精度浮点数进行训练。
+    "lr_decay": 0.999875,  //lr_decay：学习率衰减因子。
+    "segment_size": 16384, //segment_size：输入音频的长度，用于分段训练
+    "init_lr_ratio": 1, //init_lr_ratio：初始学习率与默认学习率之比。
+    "warmup_epochs": 0, //warmup_epochs：学习率预热的epoch数。
+    "c_mel": 45,  //c_mel：用于计算KL散度的mel滤波器数目。
+    "c_kl": 1.0,  //c_kl：KL散度的权重系数。
+    "save_dir": "./logdir/vispeech" //save_dir：训练日志和模型保存的目录路径。
   },
   "data": {
-    "training_files": "filelists/train.list",
-    "validation_files": "filelists/val.list",
-    "max_wav_value": 32768.0,
-    "sampling_rate": 44100,
-    "filter_length": 2048,
-    "hop_length": 512,
-    "win_length": 2048,
-    "n_mel_channels": 80,
-    "mel_fmin": 0.0,
-    "mel_fmax": null,
-    "add_blank": true,
-    "n_speakers": 200,
-    "cleaned_text": true,
-    "spk2id": {
+    "training_files": "filelists/train.list", //训练数据的文件列表路径。
+    "validation_files": "filelists/val.list", //验证数据的文件列表路径。
+    "max_wav_value": 32768.0, //音频数据的最大值，用于归一化
+    "sampling_rate": 44100,  //采样率，表示每秒采样的次数。
+    "filter_length": 2048, //滤波器的长度
+    "hop_length": 512, //帧移，即相邻两帧之间的采样点数
+    "win_length": 2048, //窗口长度，即每个帧的采样点数。
+    "n_mel_channels": 80, //mel滤波器的数目，用于将音频数据转换为梅尔频率。
+    "mel_fmin": 0.0, //mel滤波器的最小频率。
+    "mel_fmax": null, //mel滤波器的最大频率
+    "add_blank": true, // 是否添加空白标记，用于语音识别
+    "n_speakers": 200,//说话人的数目
+    "cleaned_text": true, //是否使用清理过的文本进行训练。
+    "spk2id": {  //每个说话人的ID
       "SSB1125": 0,
       "SSB0434": 1,
       "SSB0631": 2,
@@ -135,25 +138,25 @@
         5
       ]
     ],
-    "upsample_rates": [
+    "upsample_rates": [ //上采样的比率列表，用于将低采样率的音频转换为高采样率的音频。
       8,
       8,
       4,
       2
     ],
-    "upsample_initial_channel": 512,
-    "upsample_kernel_sizes": [
+    "upsample_initial_channel": 512, //上采样的初始通道数。
+    "upsample_kernel_sizes": [ //上采样使用的卷积核大小列表。
       16,
       16,
       4,
       4
     ],
-    "n_layers_q": 3,
-    "use_spectral_norm": false,
-    "gin_channels": 256,
-    "f0_mean": 171.21,
-    "f0_std": 128.9,
-    "freeze_textencoder": false,
-    "freeze_decoder": false
+    "n_layers_q": 3, //离散流量网络的层数。
+    "use_spectral_norm": false, //是否使用谱归一化。
+    "gin_channels": 256, //全局信息网络的通道数。
+    "f0_mean": 171.21, //基频的平均值。
+    "f0_std": 128.9, //基频的标准差。
+    "freeze_textencoder": false, //是否冻结文本编码器.
+    "freeze_decoder": false  //是否冻结解码器。
   }
 }
