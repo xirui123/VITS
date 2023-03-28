@@ -44,3 +44,38 @@ if __name__ == "__main__":
   print(text_simple)
   text_traditional = simplified_to_traditional(text_simple)
   print(text_traditional)
+
+
+  #The code is written in Python and it contains a set of functions for converting traditional Chinese characters 
+  #to simplified Chinese characters and vice versa.
+  #该代码是用 Python 编写的，它包含一组将繁体汉字转换为简体汉字的函数，反之亦然。
+
+  #The first line of the code uses the assert statement to check that the length of the simplified_characters list 
+  #is equal to the length of the same list. This is a way to check if there are any errors 
+  #in the code that might have modified the length of the list.
+  #代码的第一行使用 assert 语句检查 simplified_characters 列表的长度是否等于同一列表的长度
+  #。这是一种检查代码中是否存在可能修改列表长度的错误的方法。
+  
+  #The next two lines of the code create two empty dictionaries s2t_dict and t2s_dict.
+  #创了两个空字典
+
+  #The enumerate function is then used to iterate over the simplified_characters list and 
+  #create a mapping between each simplified character and its corresponding traditional character.
+  # These mappings are stored in the s2t_dict and t2s_dict dictionaries.
+  #然后使用 enumerate 函数迭代 simplified_characters 列表，并在每个简化字符与其对应的繁体字符之间创建映射。
+  #这些映射存储在 s2t_dict 和 t2s_dict 字典中。
+
+  #tranditional_to_simplified函数以一串繁体汉字为输入，返回使用t2s_dict字典将汉字转换为简体汉字的字符串。
+
+#simplified_to_traditional 函数以一串简体汉字为输入，
+#返回使用s2t_dict 字典将字符转换为繁体汉字的字符串。
+
+#Finally, the if __name__ == "__main__": block is used to test the functions by converting a string of
+# traditional Chinese characters to simplified Chinese characters,
+# and then converting the resulting string back to traditional Chinese characters. 
+#The original string, the simplified string, 
+#and the final traditional string are printed to the console using the print function.
+
+#最后，if __name__ == "__main__": 块用于测试功能，将一串繁体汉字转换为简体汉字，然后将结果字符串转换回繁体汉字
+#。使用 print 函数将原始字符串、简化字符串和最终的繁体字符串打印到控制台。
+

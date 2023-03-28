@@ -1,16 +1,4 @@
-# Copyright (c) 2020 PaddlePaddle Authors. All Rights Reserved.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
+
 from collections import OrderedDict
 from typing import Iterable
 
@@ -55,6 +43,17 @@ class Vocab(object):
 
   def __len__(self):
     return len(self.stoi)
+#该代码定义了一个名为Vocab的类，它代表词汇表。Vocab的构造函数接受一个包含常用符号的可迭代对象，并提供用于填充、未知符号、起始符号和结束符号的选项。Vocab类具有以下属性和方法：
+
+#属性：
+
+#special_symbols: OrderedDict对象，它包含词汇表中的特殊符号和它们的索引。
+#padding_symbol: 填充符号。
+#unk_symbol: 未知符号。
+#start_symbol: 句子的起始符号。
+#end_symbol: 句子的结束符号。
+#stoi: 一个OrderedDict对象，将词汇表中的单词映射到其索引。
+#itos: 一个字典对象，将词汇表中的索引映射到其单词。
 
   @property
   def num_specials(self):

@@ -38,3 +38,12 @@ def half2full_width(ustr):
     full.append(u)
 
   return ''.join(full)
+
+
+#这是一段Python代码，其中定义了两个函数：
+#full2half_width和half2full_width，它们的作用是将字符串中的全角字符转换为半角字符，或者将半角字符转换为全角字符。
+
+#full2half_width函数中的for循环遍历输入字符串中的每个字符，
+#判断其Unicode编码值，如果该字符是全角空格（编码值为0x3000），则将其转换为半角空格（编码值为32）。
+#对于其他的全角字符，其编码值应在0xFF01到0xFF5E之间，所以将其减去0xFEE0即可得到对应的半角字符的编码值
+#。最后将转换后的字符添加到列表half中，并使用join函数将列表中的字符拼接成字符串返回。

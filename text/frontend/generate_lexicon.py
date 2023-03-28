@@ -1,23 +1,15 @@
-# Copyright (c) 2021 PaddlePaddle Authors. All Rights Reserved.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-# Design principles: https://zhuanlan.zhihu.com/p/349600439
 """Generate lexicon and symbols for Mandarin Chinese phonology.
 The lexicon is used for Montreal Force Aligner.
 Note that syllables are used as word in this lexicon. Since syllables rather 
 than words are used in transcriptions produced by `reorganize_baker.py`.
 We make this choice to better leverage other software for chinese text to 
 pinyin tools like pypinyin. This is the convention for G2P in Chinese.
+为普通话音韵学生成词典和符号。
+该词典用于 Montreal Force Aligner。
+请注意，音节在此词典中用作单词。由于音节而不是
+比单词用于 `reorganize_baker.py` 生成的转录中。
+我们做出这个选择是为了更好地利用其他中文文本软件
+pypinyin等拼音工具。这是中文G2P的约定。
 """
 import re
 from collections import OrderedDict
@@ -156,3 +148,7 @@ def generate_lexicon(with_tone=False, with_erhua=False):
           if result:
             syllables[result] = f'{C} {V}{R}{T}'
   return syllables
+#这段代码是用来生成普通话汉语的词典的。可以选择是否需要音调和儿化音，最终返回一个有序字典，
+#其中包含了所有可能的音节组合以及对应的拼音。具体来说，这个函数会循环遍历所有可能的声母、韵母、儿化音和音调的组合，
+#然后通过调用一个名为"rule"的函数来计算这个组合是否有效。如果是有效的，就将这个组合和对应的拼音加入到一个有序字典中，
+#并最终返回这个字典。

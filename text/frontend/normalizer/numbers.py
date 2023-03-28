@@ -83,3 +83,14 @@ def normalize_numbers(text):
   text = re.sub(_ordinal_re, _expand_ordinal, text)
   text = re.sub(_number_re, _expand_number, text)
   return text
+
+#该代码是一个用于规范化英语文本中数字的函数。它使用了Python中的正则表达式库re和一个名为inflect的Python包来扩展数字。
+#该函数将传入的文本作为输入，并在其中替换以下类型的数字：
+
+#包含逗号的数字（如1,000）
+#带有小数点的数字（如3.14）
+#带有货币符号的数字（如$5或£10）
+#序数（如1st或3rd）
+#其他数字
+#对于每种类型的数字，函数都定义了一个与之匹配的正则表达式，
+#并定义了一个函数来扩展数字。最后，函数将文本中的所有数字替换为扩展的数字，并返回规范化后的文本。
