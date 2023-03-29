@@ -28,7 +28,12 @@ from string import punctuation
 
 pu_symbols = ['!', '?', '…', ",", "."]
 
+#这段代码定义了一个函数 others_to_phonemes，
+#用于将文本转换为音素序列。具体来说，它会对输入文本进行分段，
+#然后针对不同语种调用对应的函数进行转换。
 
+#其中，en_to_phonemes 函数用于将英文文本转换为音素序列，
+#ja_to_phonemes 函数用于将日语文本转换为音素序列，zh_to_phonemes 函数用于将中文文本转换为音素序列。
 # print(_symbol_to_id)
 
 def str_replace(data):

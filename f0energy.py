@@ -127,3 +127,20 @@ with open(f"filelists/{lang}_train.list", "w") as outfile:
     iii += 1
     # if iii >st+pic:
     #     break
+    #这段代码的功能是处理语音数据，提取语音的基频和能量，并将这些信息保存到文件中。
+    #具体地，代码的执行流程如下：
+
+#1.使用librosa库中的load函数加载指定路径下的音频文件，并返回音频信号y和采样率sr。
+#2.调用rawenergy函数提取音频信号的能量，并返回一个一维的numpy数组e。
+#3，调用get_pitch函数提取音频信号的基频，并返回一个一维的numpy数组pitch。
+#4.对提取得到的基频和能量信息进行平滑处理，使其长度与语音的音素序列长度相同。
+#5.将基频和能量信息以及语音的音素序列和持续时间写入到一个文本文件中，并保存到指定的目录下。
+
+#代码中涉及到的主要函数及其作用如下：
+
+#stft(y)：使用librosa库中的stft函数对输入的音频信号y进行短时傅里叶变换，返回复数矩阵S，其中第一维是频率，第二维是时间。
+#rawenergy(y)：提取音频信号y的能量，并返回一个一维的numpy数组。
+#get_energy(path, p_len=None)：从指定路径加载音频文件，提取音频信号的能量，并进行长度的处理。
+#get_pitch(path, lll)：从指定路径加载音频文件，提取音频信号的基频，并进行长度的处理。
+#interp1d(x, y, fill_value, bounds_error)：使用scipy库中的interp1d函数进行线性插值，将基频信息进行平滑处理。
+#shutil.move(src, dst)：将src指定的文件移动到dst指定的目录下。

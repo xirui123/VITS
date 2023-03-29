@@ -118,6 +118,11 @@ class Ui_MainWindow(object):
   def test_bind(self):
     print("clicked")
 
+  #这段代码是一个 PyQt5 应用程序的界面类 Ui_MainWindow，其中 setupUi 函数用于设置窗口的布局，
+  #包括一个 QTextEdit 和两个 QPushButton 等控件，并连接了它们的信号与槽函数。clear 函数用于清除控件内容。
+  #infer 函数是一个槽函数，响应 pushButton_3 按钮的点击事件，根据用户输入的文本和音高控制参数，
+  #生成一段语音并播放出来，同时将音高曲线显示在一个自定义的 ControlArea 控件中。
+  #retranslateUi 函数用于设置窗口标题和控件文本。test_bind 函数是一个测试函数，用于检测按钮的点击事件。
 
 class ControlArea(QScrollArea):
 
@@ -188,7 +193,7 @@ class ControlArea(QScrollArea):
     [c.deleteLater() for c in self.contents.children()]
     self.elements.clear()
     self.current_start = self.elememt_start
-
+#主要是用于添加多个滑块控件和对应的标签。
 
 class Element:
   def __init__(self, slider, text, value, name, min, max):
@@ -240,3 +245,8 @@ if __name__ == "__main__":
   win = UiMainWindow()
   win.show()
   sys.exit(app.exec_())
+
+  #Element类的主要功能是为UI控件提供控制，包括滑动条(slider)、标签(text)和数值显示(value)。
+  #它的构造函数接收这些控件的实例以及名称(name)、最小值(min)和最大值(max)。在初始化时，
+  #它将这些控件保存在成员变量中，并将滑动条的valueChanged信号连接到一个slider_value_change方法，
+  #以响应滑动条值的变化。slider_value_change方法将滑动条的当前值转换为数值，并将其显示在数值控件中。

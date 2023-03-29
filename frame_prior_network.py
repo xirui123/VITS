@@ -52,7 +52,8 @@ class Conv(nn.Module):
     x = x.contiguous().transpose(1, 2)
 
     return x
-
+#这是一个卷积神经网络(Convolutional Neural Network)的模块，其中包含了一个一维卷积层(nn.Conv1d)。
+#该模块的作用是对输入数据进行卷积操作，从而提取输入数据的特征。
 
 class VariancePredictor(nn.Module):
   """Duration, Pitch and Energy Predictor"""
@@ -66,12 +67,12 @@ class VariancePredictor(nn.Module):
     self.conv_output_size = 768
     self.dropout = 0.5
 
-    self.conv_layer = nn.Sequential(
+    self.conv_layer = nn.Sequential( # 定义卷积层
       OrderedDict(
         [
           (
             "conv_1",
-            Conv(
+            Conv( # 调用自定义的Conv类，进行卷积操作
               self.input_size,
               self.filter_size,
               kernel_size=self.kernel,
@@ -83,29 +84,34 @@ class VariancePredictor(nn.Module):
           ("dropout_1", nn.Dropout(self.dropout)),
           (
             "conv_2",
-            Conv(
+            Conv(  # 再次调用Conv类
               self.filter_size,
               self.filter_size,
               kernel_size=self.kernel,
               padding=(self.kernel - 1) // 2,
             ),
           ),
-          ("relu_2", nn.ReLU()),
-          ("layer_norm_2", nn.LayerNorm(self.filter_size)),
-          ("dropout_2", nn.Dropout(self.dropout)),
+          ("relu_2", nn.ReLU()),# ReLU激活函数
+          ("layer_norm_2", nn.LayerNorm(self.filter_size)),# LayerNorm归一化
+          ("dropout_2", nn.Dropout(self.dropout)),# dropout正则化
         ]
       )
     )
 
-    self.linear_layer = nn.Linear(self.conv_output_size, 1)
-    self.proj = nn.Linear(1, self.input_size)
+    self.linear_layer = nn.Linear(self.conv_output_size, 1) #线性层
+    self.proj = nn.Linear(1, self.input_size) #线性层
 
   def forward(self, encoder_output):
-    encoder_output = encoder_output.transpose(1, 2)
+    encoder_output = encoder_output.transpose(1, 2) # 转置操作
     # encoder_output size: [batch_size, max_len, hidden_channels]
     out = self.conv_layer(encoder_output)
     out = self.linear_layer(out)
     return out.squeeze(-1)
+#这是一个神经网络模型，名为VariancePredictor，用于预测语音合成中的时长、音高和能量。
+#这个模型中使用了两个卷积的主要原因是为了增加模型的非线性能力和表达能力。
+#一个卷积层只能捕捉到一些低级的特征，而多个卷积层可以逐渐捕捉到更高层次的特征
+#，从而使模型能够更好地提取输入数据的特征。在这个预测模型中，第一个卷积层将输入特征映射到一个高维的特征空间，
+#第二个卷积层则对第一个卷积层的输出特征进行进一步的特征提取和细化，从而提高了模型的性能。
 
 
 class EnergyPredictor(nn.Module):
@@ -113,7 +119,7 @@ class EnergyPredictor(nn.Module):
     super(EnergyPredictor, self).__init__()
     self.predictor = VariancePredictor(input_size)
     if gin_channels != 0:
-      self.cond = nn.Conv1d(gin_channels, input_size, 1)
+      self.cond = nn.Conv1d(gin_channels, input_size, 1) #定义卷积层
 
   def forward(self, encoder_output, g):
     g = torch.detach(g)
@@ -122,6 +128,11 @@ class EnergyPredictor(nn.Module):
 
     return pred_norm_energy
 
+
+#用于预测音频帧的能量值。
+#forward方法接受编码器输出encoder_output和全局条件向量g作为输入，
+#首先将全局条件向量通过卷积层调整大小后加入编码器输出中，
+#再将结果作为输入传入能量方差预测模型VariancePredictor中，最终返回预测的音频帧能量值。
 
 class Swish(nn.Module):
   """
@@ -134,6 +145,7 @@ class Swish(nn.Module):
 
   def forward(self, inputs: Tensor) -> Tensor:
     return inputs * inputs.sigmoid()
+
 
 
 class Linear(nn.Module):
