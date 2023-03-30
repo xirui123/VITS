@@ -103,3 +103,18 @@ def mel_spectrogram_torch(y, n_fft, num_mels, sampling_rate, hop_size, win_size,
   spec = spectral_normalize_torch(spec)
 
   return spec
+#dynamic_range_compression_torch(x, C=1, clip_val=1e-5): 对输入张量进行动态范围压缩。
+#C参数是一个缩放因子，用于缩放输入张量的范围。clip_val参数是一个阈值，
+#用于截取输入张量中小于该值的部分并将其设置为该值。
+
+#dynamic_range_decompression_torch(x, C=1): 对输入张量进行动态范围解压缩。C参数是压缩时使用的缩放因子。
+
+#spectral_normalize_torch(magnitudes): 对输入的频谱张量进行范围归一化。
+
+#spectral_de_normalize_torch(magnitudes): 对输入的经过范围归一化的频谱张量进行反归一化。
+
+#spectrogram_torch(y, n_fft, sampling_rate, hop_size, win_size, center=False): 将音频波形转换为频谱图。
+
+#spec_to_mel_torch(spec, n_fft, num_mels, sampling_rate, fmin, fmax): 将给定的频谱图转换为梅尔频率倒谱系数。
+
+#mel_spectrogram_torch(y, n_fft, num_mels, sampling_rate, hop_size, win_size, fmin, fmax, center=False): 将音频波形转换为梅尔频谱图。
