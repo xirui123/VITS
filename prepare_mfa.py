@@ -55,3 +55,11 @@ if __name__ == '__main__':
   #         o.write(phones + "\n")
   print("rm -rf ./mfa_temp/temp; mfa align mfa_temp/wavs/zh mfa_temp/zh_dict.dict mfa_temp/aishell3_model.zip mfa_temp/textgrids/zh --clean --overwrite -t ./mfa_temp/temp -j 5")
   print("rm -rf ./mfa_temp/temp; mfa train mfa_temp/wavs/ja/ mfa_temp/ja_dict.dict mfa_temp/model.zip mfa_temp/textgrids/ja --clean --overwrite -t ./mfa_temp/temp -j 5")
+ #这段代码主要是进行音素对齐所需的数据预处理工作，包括将原始的文本转化为音素序列，对数据进行并行处理，对每个音频文件进行音素对齐操作。
+ #定义一个函数 process_text，用于将输入的一行文本进行处理，返回文件名和对应的音素序列。
+
+#利用 ProcessPoolExecutor 对数据进行并行处理，每个子进程处理一行文本，将处理结果存入 futures 列表。
+
+#遍历 futures 列表，对每个处理结果进行后续的音素对齐操作。其中，使用 librosa 库读取音频文件，使用 MFA 工具进行音素对齐操作，并将结果存入相应的文本文件中。
+
+#最后输出两个命令行语句，用于进行中文和日文的音素对齐操作。
